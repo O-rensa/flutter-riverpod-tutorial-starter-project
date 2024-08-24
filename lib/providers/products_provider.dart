@@ -1,5 +1,7 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_files/models/product.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'products_provider.g.dart';
 
 const List<Product> allProducts = [
   Product(id: '1', title: 'Groovy Shorts', price: 12, image: 'assets/products/shorts.png'),
@@ -12,11 +14,24 @@ const List<Product> allProducts = [
   Product(id: '8', title: 'Electric Guitar', price: 79, image: 'assets/products/guitar.png'),
 ];
 
-final productsProvider = Provider<List<Product>>((ref) {
-  return allProducts;
-});
+//final productsProvider = Provider<List<Product>>((ref) {
+//  return allProducts;
+//});
 
 // return products price is less than 50
-final reducedProductsProvier = Provider<List<Product>>((ref) {
+//final reducedProductsProvider = Provider<List<Product>>((ref) {
+//  return allProducts.where((p) => p.price < 50).toList();
+//});
+
+// generated providers
+
+// recreate productsProvider
+@riverpod
+List<Product> products(ref) {
+  return allProducts;
+}
+
+@riverpod
+List<Product> reducedProducts(ref) {
   return allProducts.where((p) => p.price < 50).toList();
-});
+}
